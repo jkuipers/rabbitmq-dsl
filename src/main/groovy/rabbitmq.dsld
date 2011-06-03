@@ -79,11 +79,16 @@ enclosingCallName("queue").accept {
 	useNamedArgs: true,
 	doc: """
 		Register a message consumer for the outer queue by calling a passed in Closure
-		with a org.springframework.amqp.core.Message. 
+		with an <b>org.springframework.amqp.core.Message</b>. 
 		Closure can be passed is as-is as the single parameter, or as the value of a 
-		named <b>onmessage</b> parameter: this parameter accepts an event name as value
-		as an alternative to a closure, in which case you'll need to register an event
-		handler using 'on'. 
+		named <b>onmessage</b> parameter. This parameter accepts the following inputs as
+		a closure alternative:
+		<ul>
+			<li>an event name, in which case you'll need to register an event handler using 'on'</li> 
+			<li>an <a href="org.springframework.amqp.core.MessageListener"><b>MessageListener</b></a> implementation
+			<li>a POJO that will be wrapped in a MessageListenerAdapter
+		</ul>
 		The other valid named parameter is <b>ack</b> (one of 'NONE', 'MANUAL' or 'AUTO' where 'AUTO is the default').
+		Return 'false' or null to stop the listener, 'true' or non-null to keep listening.
 	"""
 }
